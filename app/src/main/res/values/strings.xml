@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My TCP Client Application</string>
+    <string name="test_connection">Test Connection</string>
+    <string name="enter_message">Enter message</string>
+    <string name="server_s_reply">Server\'s reply</string>
+    <string name="send">SEND</string>
+    <string name="send_another">Send another?</string>
+</resources>
