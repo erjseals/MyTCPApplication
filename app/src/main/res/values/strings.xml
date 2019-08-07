@@ -5,4 +5,5 @@
     <string name="server_s_reply">Server\'s reply</string>
     <string name="send">SEND</string>
     <string name="send_another">Send another?</string>
+    <string name="capture_image">CAPTURE IMAGE</string>
 </resources>
