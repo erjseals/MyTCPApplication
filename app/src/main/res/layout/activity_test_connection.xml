@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".TestConnectionSend">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="380dp"
+        android:text="@string/server_s_reply"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
@@ -18,7 +29,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/enter_message"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:autofillHints="your message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,16 +37,17 @@
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.133" />
 </androidx.constraintlayout.widget.ConstraintLayout>
