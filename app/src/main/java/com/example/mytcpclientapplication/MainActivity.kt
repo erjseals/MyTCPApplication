@@ -18,11 +18,7 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     private val permissionCode = 1000
-    private val imageCaptureCode = 1001
-    private var imageUri: Uri? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,26 +41,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 else {
                     //permission already granted
-                    openCamera()
+                    goToANewActivity()
                 }
             }
             else{
                 //system version too old
-                openCamera()
+                goToANewActivity()
             }
         }
-    }
-
-    private fun openCamera() {
-//        val values = ContentValues()
-//        values.put(MediaStore.Images.Media.TITLE, "New Picture")
-//        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-//        imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-
-
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-        startActivityForResult(cameraIntent, imageCaptureCode)
     }
 
     override fun onRequestPermissionsResult(
@@ -76,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             permissionCode -> {
                 if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //permission granted from popup
-                    openCamera()
+                    goToANewActivity()
                 }
                 else {
                     //permission denied
@@ -87,31 +71,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when(requestCode) {
-            imageCaptureCode -> {
-                if(resultCode == Activity.RESULT_OK && data != null){
-                    val myNewIntent = Intent()
-
-
-                    imageView.setImageBitmap(data.extras!!.get("data") as Bitmap)
-                }
-            }
-            else -> {
-                Toast.makeText(this, "Request not recognized", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
-
-        //called when image is taken
-//        if(resultCode == Activity.RESULT_OK && requestCode == imageCaptureCode){
-//            var bmp = data!!.extras!!.get("data") as Bitmap
-//            imageView.setImageBitmap(bmp)
-            //put the image on the image view
-//            imageView.setImageURI(imageUri)
+    private fun goToANewActivity() {
+        val goToCameraPage = Intent(this, DisplayImage::class.java)
+        startActivity(goToCameraPage)
     }
 }
-
