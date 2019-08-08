@@ -10,11 +10,11 @@ class TestConnectionSend : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_connection)
 
-        button2.setOnClickListener{
-            val myUtility = Utility(textView2)
-            val message = editText.text.toString()
-            myUtility.execute(message)
-        }
+//        button2.setOnClickListener{
+//            val myUtility = Utility(textView2)
+//            val message = editText.text.toString()
+//            myUtility.execute(message)
+//        }
     }
 }
 

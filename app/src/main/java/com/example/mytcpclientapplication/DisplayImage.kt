@@ -5,10 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_display_image.*
 import java.io.ByteArrayOutputStream
+import kotlin.math.log
 
 class DisplayImage : AppCompatActivity() {
     private val permissionCode = 1000
@@ -28,6 +30,9 @@ class DisplayImage : AppCompatActivity() {
         when(requestCode) {
             imageCaptureCode -> {
                 if(resultCode == Activity.RESULT_OK && data != null){
+
+                    Log.i("TRACING_CODE", "DisplayImage.kt line 34")
+
                     var bitmap = data.extras!!.get("data") as Bitmap
                     imageView2.setImageBitmap(bitmap)
 
@@ -38,6 +43,7 @@ class DisplayImage : AppCompatActivity() {
 
                     val myUtility = Utility()
                     myUtility.execute(byteArray)
+                    Log.i("TRACING_CODE", "DisplayImage.kt line 46")
                 }
             }
             else -> {
