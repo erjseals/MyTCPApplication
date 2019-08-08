@@ -1,17 +1,10 @@
 package com.example.mytcpclientapplication
 
 import android.Manifest
-import android.app.Activity
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.media.Image
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -72,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToANewActivity() {
-        val goToCameraPage = Intent(this, DisplayImage::class.java)
-        startActivity(goToCameraPage)
+        val displayImageIntent = Intent(this, DisplayImage::class.java)
+        startActivity(displayImageIntent)
     }
 }

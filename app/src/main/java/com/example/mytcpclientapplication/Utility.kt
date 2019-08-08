@@ -9,40 +9,32 @@ import java.io.DataOutputStream
 import java.io.InputStreamReader
 import java.net.Socket
 
-class Utility(
-    val textView: TextView
-) : AsyncTask<String, Void, String>() {
+class Utility() : AsyncTask<ByteArray, Void, Void>() {
 
-    override fun doInBackground(vararg p0: String?): String? {
-
-        var serverMessage = ""
-        val clientMessage = p0[0] ?: "Send a Message"
+    override fun doInBackground(vararg p0: ByteArray?): Void? {
 
         try {
             val socket = Socket("192.168.108.119", 8888)
-            DataInputStream(socket.getInputStream())
-            BufferedReader(InputStreamReader(System.`in`))
+            val out = socket.getOutputStream()
+            val dos = DataOutputStream(out)
 
-            DataOutputStream(socket.getOutputStream()).writeUTF(clientMessage)
-            DataOutputStream(socket.getOutputStream()).flush()
-            serverMessage = DataInputStream(socket.getInputStream()).readUTF()
+            dos.writeInt(p0[0]!!.size)
+            dos.write(p0[0], 0, p0[0]!!.size)
 
-
-            DataOutputStream(socket.getOutputStream()).close()
+            dos.close()
+            out.close()
             socket.close()
         }catch (e: Exception){
 
         }
-        return serverMessage
+        return null
     }
 
     override fun onPreExecute() {
         super.onPreExecute()
-        textView.text = "Waiting for message..."
     }
 
-    override fun onPostExecute(result: String?) {
+    override fun onPostExecute(result: Void?) {
         super.onPostExecute(result)
-        textView.text = result
     }
 }
