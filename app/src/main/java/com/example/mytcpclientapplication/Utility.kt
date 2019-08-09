@@ -5,14 +5,13 @@ import android.util.Log
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
-import java.util.*
 
-class Utility() : AsyncTask<ByteArray, Void, Void>() {
+class Utility : AsyncTask<ByteArray, Void, Void>() {
 
     override fun doInBackground(vararg p0: ByteArray?): Void? {
 
         try {
-            val socket = Socket("192.168.0.16", 8080)
+            val socket = Socket("192.168.108.119", 8080)
             if(socket.isConnected){
                 Log.i("TRACING_CODE", "Successfully connected")
             }
@@ -23,10 +22,6 @@ class Utility() : AsyncTask<ByteArray, Void, Void>() {
             dataOutputStream.writeInt(p0[0]!!.size)
             dataOutputStream.write(p0[0], 0, p0[0]!!.size)
 
-
-//            val req = Arrays.toString(arr)
-//            Log.i("TRACING_CODE", "$req")
-
             dataInputStream.close()
             dataOutputStream.close()
             socket.close()
@@ -34,13 +29,5 @@ class Utility() : AsyncTask<ByteArray, Void, Void>() {
 
         }
         return null
-    }
-
-    override fun onPreExecute() {
-        super.onPreExecute()
-    }
-
-    override fun onPostExecute(result: Void?) {
-        super.onPostExecute(result)
     }
 }

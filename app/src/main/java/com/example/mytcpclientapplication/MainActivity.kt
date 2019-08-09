@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -61,10 +62,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun goToANewActivity() {
+        Log.i("TRACING_CODE", "MainActivity.kt line 69")
         val displayImageIntent = Intent(this, DisplayImage::class.java)
         startActivity(displayImageIntent)
     }
