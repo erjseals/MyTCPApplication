@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -47,13 +48,13 @@ class DisplayImage : AppCompatActivity() {
 
                     imageView2.setImageURI(imageUri)
 
-                    val bitmap = (imageView2.drawable as BitmapDrawable).bitmap
+                    var bitmap = (imageView2.drawable as BitmapDrawable).bitmap
                     imageView2.setImageBitmap(bitmap)
 
                     val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
 
-                    val byteArray = stream.toByteArray()
+                    var byteArray = stream.toByteArray()
 
                     val myUtility = Utility()
                     myUtility.execute(byteArray)

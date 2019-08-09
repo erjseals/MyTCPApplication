@@ -26,7 +26,7 @@ class Utility : AsyncTask<ByteArray, Void, Void>() {
             dataOutputStream.close()
             socket.close()
         }catch (e: Exception){
-
+            Log.i("TRACING_CODE","Everything has gone wrong! Here's the error: $e")
         }
         return null
     }
