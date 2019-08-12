@@ -18,29 +18,33 @@ class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
             Log.i("TRACING_CODE", "Server Started")
             Log.i("TRACING_CODE", "Waiting for a client ...")
 
-            val socket = server.accept()
+            val socket2 = server.accept()
             Log.i("TRACING_CODE", "Client Accepted")
-            val dataInputStream = DataInputStream(socket.getInputStream())
+            val dataInputStream = DataInputStream(socket2.getInputStream())
 
             val length = dataInputStream.readInt()
             Log.i("TRACING_CODE", "Length of Array: $length")
 
+
             val data = ByteArray(length)
 
+
             if(length > 0 ){
-                dataInputStream.readFully(data)
+                dataInputStream.readFully(data, 0, data.size)
             }
 
             val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
 
+            socket2.getInputStream().close()
             dataInputStream.close()
-            socket.close()
+            socket2.close()
+
 
             return bitmap
 
-
         }catch (e: Exception){
             Log.i("TRACING_CODE","Everything has gone wrong! Here's the error: $e")
+            return null
         }
         return null
     }

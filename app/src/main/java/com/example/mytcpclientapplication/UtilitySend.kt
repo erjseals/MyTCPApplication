@@ -21,6 +21,7 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
             dataOutputStream.writeInt(p0[0]!!.size)
             dataOutputStream.write(p0[0], 0, p0[0]!!.size)
 
+            socket.getOutputStream().close()
             dataOutputStream.flush()
             dataOutputStream.close()
             socket.close()

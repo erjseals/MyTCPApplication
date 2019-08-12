@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_display_image.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.lang.Exception
 
 class DisplayImage : AppCompatActivity() {
     private val imageCaptureCode = 1001
@@ -65,9 +66,12 @@ class DisplayImage : AppCompatActivity() {
                     myUtilityReceive.execute()
                     Log.i("TRACING_CODE", "DisplayImage.kt following creation/execution of myUtilityReceive")
 
-                    bitmap = myUtilityReceive.get()
-
-                    imageView2.setImageBitmap(bitmap)
+                    try {
+                        bitmap = myUtilityReceive.get()
+                        imageView2.setImageBitmap(bitmap)
+                    }catch(e: Exception){
+                        Log.i("TRACING_CODE", "Here's your mistake: $e")
+                    }
                 }
             }
             else -> {
