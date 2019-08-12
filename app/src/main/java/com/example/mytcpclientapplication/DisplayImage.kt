@@ -65,9 +65,7 @@ class DisplayImage : AppCompatActivity() {
                     myUtilityReceive.execute()
                     Log.i("TRACING_CODE", "DisplayImage.kt following creation/execution of myUtilityReceive")
 
-                    byteArray = myUtilityReceive.get()
-
-                    bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                    bitmap = myUtilityReceive.get()
 
                     imageView2.setImageBitmap(bitmap)
                 }

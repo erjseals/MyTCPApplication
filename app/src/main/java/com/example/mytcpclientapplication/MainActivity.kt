@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Log.i("TRACING_CODE", "Application Starting!")
+
         //button click
         captureButton.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){

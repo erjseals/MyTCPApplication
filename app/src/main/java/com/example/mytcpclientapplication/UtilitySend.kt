@@ -17,12 +17,11 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
             }
 
             val dataOutputStream = DataOutputStream(socket.getOutputStream())
-            val dataInputStream = DataInputStream(socket.getInputStream())
 
             dataOutputStream.writeInt(p0[0]!!.size)
             dataOutputStream.write(p0[0], 0, p0[0]!!.size)
 
-            dataInputStream.close()
+            dataOutputStream.flush()
             dataOutputStream.close()
             socket.close()
         }catch (e: Exception){
