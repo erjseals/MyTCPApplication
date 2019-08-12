@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -44,7 +43,7 @@ class DisplayImage : AppCompatActivity() {
             imageCaptureCode -> {
                 if(resultCode == Activity.RESULT_OK && data == null){
 
-                    Log.i("TRACING_CODE", "DisplayImage.kt line 34")
+                    Log.i("TRACING_CODE", "DisplayImage.kt entering into the main body")
 
                     imageView2.setImageURI(imageUri)
 
@@ -52,13 +51,21 @@ class DisplayImage : AppCompatActivity() {
                     imageView2.setImageBitmap(bitmap)
 
                     val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 15, stream)
 
                     var byteArray = stream.toByteArray()
 
-                    val myUtility = Utility()
-                    myUtility.execute(byteArray)
-                    Log.i("TRACING_CODE", "DisplayImage.kt line 46")
+                    val myUtilitySend = UtilitySend()
+                    myUtilitySend.execute(byteArray)
+                    Log.i("TRACING_CODE", "DisplayImage.kt following creation/execution of myUtilitySend")
+
+                    val myUtilityReceive = UtilityReceive()
+                    myUtilityReceive.execute()
+                    Log.i("TRACING_CODE", "DisplayImage.kt following creation/execution of myUtilityReceive")
+
+                    byteArray = myUtilityReceive.get()
+                    //This line needs to convert the bytearray to the bitmap
+                    imageView2.setImageBitmap(bitmap)
                 }
             }
             else -> {

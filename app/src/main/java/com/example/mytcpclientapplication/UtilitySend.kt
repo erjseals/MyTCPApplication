@@ -6,7 +6,7 @@ import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
 
-class Utility : AsyncTask<ByteArray, Void, Void>() {
+class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
 
     override fun doInBackground(vararg p0: ByteArray?): Void? {
 
