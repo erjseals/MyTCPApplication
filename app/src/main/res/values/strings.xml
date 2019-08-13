@@ -7,4 +7,5 @@
     <string name="send_another">Send another?</string>
     <string name="capture_image">CAPTURE</string>
     <string name="gallery">GALLERY</string>
+    <string name="title_activity_template">ActivityTemplate</string>
 </resources>
