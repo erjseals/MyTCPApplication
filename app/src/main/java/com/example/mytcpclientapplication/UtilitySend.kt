@@ -2,7 +2,6 @@ package com.example.mytcpclientapplication
 
 import android.os.AsyncTask
 import android.util.Log
-import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.Socket
 
@@ -11,7 +10,7 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
     override fun doInBackground(vararg p0: ByteArray?): Void? {
 
         try {
-            val socket = Socket("10.104.107.217", 8080)
+            val socket = Socket("192.168.108.119", 8080)
             if(socket.isConnected){
                 Log.i("TRACING_CODE", "Successfully connected")
             }

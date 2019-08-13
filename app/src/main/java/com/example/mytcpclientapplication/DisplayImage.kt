@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -13,9 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_display_image.*
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
 
 class DisplayImage : AppCompatActivity() {
     private val imageCaptureCode = 1001
@@ -54,7 +51,7 @@ class DisplayImage : AppCompatActivity() {
                     imageView2.setImageBitmap(bitmap)
 
                     val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 15, stream)
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream)
 
                     var byteArray = stream.toByteArray()
 

@@ -5,9 +5,7 @@ import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.util.Log
 import java.io.DataInputStream
-import java.io.DataOutputStream
 import java.net.ServerSocket
-import java.net.Socket
 
 class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
 
