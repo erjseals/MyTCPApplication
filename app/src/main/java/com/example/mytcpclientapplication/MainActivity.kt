@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         //We are setting up the button
         //Need to check permissions
 
-        captureButton.setOnClickListener {
+        floatingActionButton.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_DENIED ||

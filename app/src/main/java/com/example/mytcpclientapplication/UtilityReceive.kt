@@ -55,6 +55,11 @@ class UtilityReceive(progressBar: ProgressBar) : AsyncTask<ImageView, Void, Bitm
         return null
     }
 
+    override fun onPreExecute() {
+        super.onPreExecute()
+        mProgressBar.visibility = View.VISIBLE
+    }
+
     override fun onPostExecute(result: Bitmap?) {
         super.onPostExecute(result)
         imageView?.setImageBitmap(result)

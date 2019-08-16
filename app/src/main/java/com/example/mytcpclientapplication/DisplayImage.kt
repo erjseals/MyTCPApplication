@@ -43,8 +43,6 @@ class DisplayImage : AppCompatActivity() {
 
                     imageView2.setImageURI(imageUri)
 
-                    progressBar.visibility = View.VISIBLE
-
                     var bitmap = (imageView2.drawable as BitmapDrawable).bitmap
 
                     val stream = ByteArrayOutputStream()
