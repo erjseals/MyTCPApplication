@@ -12,7 +12,7 @@ class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
     override fun doInBackground(vararg p0: Void?): Bitmap? {
 
         try {
-            val server = ServerSocket(8080)
+            val server = ServerSocket(8000)
             Log.i("TRACING_CODE", "Server Started")
             Log.i("TRACING_CODE", "Waiting for a client ...")
 
@@ -27,7 +27,7 @@ class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
             val data = ByteArray(length)
 
 
-            if(length > 0 ){
+            if (length > 0) {
                 dataInputStream.readFully(data, 0, data.size)
             }
 
@@ -40,8 +40,8 @@ class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
 
             return bitmap
 
-        }catch (e: Exception){
-            Log.i("TRACING_CODE","Everything has gone wrong! Here's the error: $e")
+        } catch (e: Exception) {
+            Log.i("TRACING_CODE", "Everything has gone wrong! Here's the error: $e")
             return null
         }
         return null

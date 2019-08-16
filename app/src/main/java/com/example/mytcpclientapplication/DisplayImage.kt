@@ -21,12 +21,12 @@ class DisplayImage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_image)
-//
+
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
         imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-//
+
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
 
@@ -36,12 +36,15 @@ class DisplayImage : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        Log.i("TRACING_CODE", "DisplayImage.kt line 39: bool1 is ${resultCode == Activity.RESULT_OK}")
+        Log.i(
+            "TRACING_CODE",
+            "DisplayImage.kt line 39: bool1 is ${resultCode == Activity.RESULT_OK}"
+        )
         Log.i("TRACING_CODE", "DisplayImage.kt line 39: bool2 is ${data != null}")
 
-        when(requestCode) {
+        when (requestCode) {
             imageCaptureCode -> {
-                if(resultCode == Activity.RESULT_OK && data == null){
+                if (resultCode == Activity.RESULT_OK && data == null) {
 
                     Log.i("TRACING_CODE", "DisplayImage.kt entering into the main body")
 
@@ -51,22 +54,28 @@ class DisplayImage : AppCompatActivity() {
                     imageView2.setImageBitmap(bitmap)
 
                     val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
 
                     var byteArray = stream.toByteArray()
 
                     val myUtilitySend = UtilitySend()
                     myUtilitySend.execute(byteArray)
-                    Log.i("TRACING_CODE", "DisplayImage.kt following creation/execution of myUtilitySend")
+                    Log.i(
+                        "TRACING_CODE",
+                        "DisplayImage.kt following creation/execution of myUtilitySend"
+                    )
 
                     val myUtilityReceive = UtilityReceive()
                     myUtilityReceive.execute()
-                    Log.i("TRACING_CODE", "DisplayImage.kt following creation/execution of myUtilityReceive")
+                    Log.i(
+                        "TRACING_CODE",
+                        "DisplayImage.kt following creation/execution of myUtilityReceive"
+                    )
 
                     try {
                         bitmap = myUtilityReceive.get()
                         imageView2.setImageBitmap(bitmap)
-                    }catch(e: Exception){
+                    } catch (e: Exception) {
                         Log.i("TRACING_CODE", "Here's your mistake: $e")
                     }
                 }

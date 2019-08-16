@@ -21,26 +21,28 @@ class MainActivity : AppCompatActivity() {
         //Log.i("TRACING_CODE", "Application Starting!")
 
         //button click
-        captureButton.setOnClickListener{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        captureButton.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                     )
-                    == PackageManager.PERMISSION_DENIED) {
+                    == PackageManager.PERMISSION_DENIED
+                ) {
                     //permission not accepted
-                    val permission = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    val permission = arrayOf(
+                        android.Manifest.permission.CAMERA,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
                     //show popup to user to request
                     requestPermissions(permission, permissionCode)
-                }
-                else {
+                } else {
                     //permission already granted
                     goToANewActivity()
                 }
-            }
-            else{
+            } else {
                 //system version too old
                 goToANewActivity()
             }
@@ -52,13 +54,12 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        when(requestCode) {
+        when (requestCode) {
             permissionCode -> {
-                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //permission granted from popup
                     goToANewActivity()
-                }
-                else {
+                } else {
                     //permission denied
                     Toast.makeText(this, "Permission Not Granted", Toast.LENGTH_SHORT).show()
                 }

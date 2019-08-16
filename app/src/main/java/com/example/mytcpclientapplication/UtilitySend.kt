@@ -10,8 +10,8 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
     override fun doInBackground(vararg p0: ByteArray?): Void? {
 
         try {
-            val socket = Socket("192.168.108.119", 8080)
-            if(socket.isConnected){
+            val socket = Socket("192.168.108.119", 8000)
+            if (socket.isConnected) {
                 Log.i("TRACING_CODE", "Successfully connected")
             }
 
@@ -24,8 +24,8 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
             dataOutputStream.flush()
             dataOutputStream.close()
             socket.close()
-        }catch (e: Exception){
-            Log.i("TRACING_CODE","Everything has gone wrong! Here's the error: $e")
+        } catch (e: Exception) {
+            Log.i("TRACING_CODE", "Everything has gone wrong! Here's the error: $e")
         }
         return null
     }
