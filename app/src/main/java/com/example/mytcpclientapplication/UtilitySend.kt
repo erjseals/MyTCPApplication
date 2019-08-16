@@ -12,7 +12,10 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
         try {
             val socket = Socket("192.168.108.119", 8000)
             if (socket.isConnected) {
-                Log.i("TRACING_CODE", "Successfully connected")
+                Log.i(
+                    "TRACING_CODE",
+                    "Successfully connected"
+                )
             }
 
             val dataOutputStream = DataOutputStream(socket.getOutputStream())
@@ -25,7 +28,10 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
             dataOutputStream.close()
             socket.close()
         } catch (e: Exception) {
-            Log.i("TRACING_CODE", "Everything has gone wrong! Here's the error: $e")
+            Log.i(
+                "TRACING_CODE",
+                "Everything has gone wrong! Here's the error: $e"
+            )
         }
         return null
     }

@@ -18,20 +18,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Log.i("TRACING_CODE", "Application Starting!")
+        Log.i(
+            "TRACING_CODE",
+            "MainActivity: Starting"
+        )
 
-        //button click
+        //We are setting up the button
+        //Need to check permissions
+
         captureButton.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_DENIED ||
-                    ContextCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_DENIED
                 ) {
-                    //permission not accepted
+                    //Permissions are not correct, need to request the user to set up
                     val permission = arrayOf(
                         android.Manifest.permission.CAMERA,
                         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 //system version too old
-                goToANewActivity()
+                Toast.makeText(this, "System Version too old", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -68,7 +70,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToANewActivity() {
-        Log.i("TRACING_CODE", "MainActivity.kt line 69")
+        Log.i(
+            "TRACING_CODE",
+            "MainActivity: Heading to DisplayImage"
+        )
         val displayImageIntent = Intent(this, DisplayImage::class.java)
         startActivity(displayImageIntent)
     }

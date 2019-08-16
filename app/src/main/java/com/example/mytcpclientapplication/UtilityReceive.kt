@@ -4,14 +4,22 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import android.widget.ProgressBar
 import java.io.DataInputStream
 import java.net.ServerSocket
 
-class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
+class UtilityReceive(progressBar: ProgressBar) : AsyncTask<ImageView, Void, Bitmap>() {
 
-    override fun doInBackground(vararg p0: Void?): Bitmap? {
+    var imageView: ImageView? = null
+    var mProgressBar = progressBar
+
+    override fun doInBackground(vararg p0: ImageView?): Bitmap? {
 
         try {
+            imageView = p0[0]
+
             val server = ServerSocket(8000)
             Log.i("TRACING_CODE", "Server Started")
             Log.i("TRACING_CODE", "Waiting for a client ...")
@@ -45,5 +53,12 @@ class UtilityReceive : AsyncTask<Void, Void, Bitmap>() {
             return null
         }
         return null
+    }
+
+    override fun onPostExecute(result: Bitmap?) {
+        super.onPostExecute(result)
+        imageView?.setImageBitmap(result)
+        mProgressBar.visibility = View.GONE
+
     }
 }

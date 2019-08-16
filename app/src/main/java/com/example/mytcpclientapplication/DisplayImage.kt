@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_display_image.*
@@ -36,22 +37,15 @@ class DisplayImage : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        Log.i(
-            "TRACING_CODE",
-            "DisplayImage.kt line 39: bool1 is ${resultCode == Activity.RESULT_OK}"
-        )
-        Log.i("TRACING_CODE", "DisplayImage.kt line 39: bool2 is ${data != null}")
-
         when (requestCode) {
             imageCaptureCode -> {
                 if (resultCode == Activity.RESULT_OK && data == null) {
 
-                    Log.i("TRACING_CODE", "DisplayImage.kt entering into the main body")
-
                     imageView2.setImageURI(imageUri)
 
+                    progressBar.visibility = View.VISIBLE
+
                     var bitmap = (imageView2.drawable as BitmapDrawable).bitmap
-                    imageView2.setImageBitmap(bitmap)
 
                     val stream = ByteArrayOutputStream()
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
@@ -60,28 +54,13 @@ class DisplayImage : AppCompatActivity() {
 
                     val myUtilitySend = UtilitySend()
                     myUtilitySend.execute(byteArray)
-                    Log.i(
-                        "TRACING_CODE",
-                        "DisplayImage.kt following creation/execution of myUtilitySend"
-                    )
 
-                    val myUtilityReceive = UtilityReceive()
-                    myUtilityReceive.execute()
-                    Log.i(
-                        "TRACING_CODE",
-                        "DisplayImage.kt following creation/execution of myUtilityReceive"
-                    )
-
-                    try {
-                        bitmap = myUtilityReceive.get()
-                        imageView2.setImageBitmap(bitmap)
-                    } catch (e: Exception) {
-                        Log.i("TRACING_CODE", "Here's your mistake: $e")
-                    }
+                    val myUtilityReceive = UtilityReceive(progressBar)
+                    myUtilityReceive.execute(imageView2)
                 }
             }
             else -> {
-                Toast.makeText(this, "Request not recognized", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "DisplayImage: Request not recognized", Toast.LENGTH_SHORT).show()
             }
         }
     }
