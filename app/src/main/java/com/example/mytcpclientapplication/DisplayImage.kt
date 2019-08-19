@@ -16,30 +16,43 @@ import kotlinx.android.synthetic.main.activity_display_image.*
 import java.io.ByteArrayOutputStream
 
 class DisplayImage : AppCompatActivity() {
-    private val imageCaptureCode = 1001
+    companion object{
+        private const val IMAGE_CAPTURE_CODE = 1001
+        private const val IMAGE_GALLERY_CODE = 1002
+    }
     private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_image)
 
-        val values = ContentValues()
-        values.put(MediaStore.Images.Media.TITLE, "New Picture")
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-        imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        var mIntentCode = intent.getIntExtra("requestCode", 0)
+        Log.i(
+            "TRACING_CODE",
+            "mIntentCode: $mIntentCode"
+        )
 
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-
-        startActivityForResult(cameraIntent, imageCaptureCode)
+        when (mIntentCode) {
+            1 -> {startImageCapture()}
+            2 -> {startGallery()}
+            else -> {Toast.makeText(this, "error code", Toast.LENGTH_SHORT).show()}
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        Log.i(
+            "TRACING_CODE",
+            "in onActivityResult\nrequestCode: $requestCode"
+        )
         when (requestCode) {
-            imageCaptureCode -> {
+            IMAGE_CAPTURE_CODE -> {
                 if (resultCode == Activity.RESULT_OK && data == null) {
+                    Log.i(
+                        "TRACING_CODE",
+                        "in IMAGE_CAPTURE_CODE"
+                    )
 
                     imageView2.setImageURI(imageUri)
 
@@ -57,9 +70,44 @@ class DisplayImage : AppCompatActivity() {
                     myUtilityReceive.execute(imageView2)
                 }
             }
+            IMAGE_GALLERY_CODE -> {
+                if (resultCode == Activity.RESULT_OK){
+                    Log.i(
+                        "TRACING_CODE",
+                        "in IMAGE_GALLERY_CODE"
+                    )
+                    imageView2.setImageURI(data?.data)
+                }
+            }
             else -> {
                 Toast.makeText(this, "DisplayImage: Request not recognized", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun startImageCapture(){
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "New Picture")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
+        imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+        Log.i(
+            "TRACING_CODE",
+            "in startImageCapture"
+        )
+    }
+
+    private fun startGallery(){
+        val galleryIntent = Intent(Intent.ACTION_PICK)
+        galleryIntent.type = "image/*"
+        startActivityForResult(galleryIntent, IMAGE_CAPTURE_CODE)
+        Log.i(
+            "TRACING_CODE",
+            "in startGallery"
+            )
     }
 }
