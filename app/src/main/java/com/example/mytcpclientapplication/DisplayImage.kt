@@ -26,7 +26,7 @@ class DisplayImage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_image)
 
-        var mIntentCode = intent.getIntExtra("requestCode", 0)
+        val mIntentCode = intent.getIntExtra("requestCode", 0)
         Log.i(
             "TRACING_CODE",
             "mIntentCode: $mIntentCode"
@@ -49,56 +49,47 @@ class DisplayImage : AppCompatActivity() {
                     "\nData should be null: ${data==null}"
 
         )
-        when (requestCode) {
-            IMAGE_CAPTURE_CODE -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    Log.i(
-                        "TRACING_CODE",
-                        "in IMAGE_CAPTURE_CODE"
-                    )
-
-                    imageView2.setImageURI(imageUri)
-
-                    var bitmap = (imageView2.drawable as BitmapDrawable).bitmap
-
-                    val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
-
-                    var byteArray = stream.toByteArray()
-
-                    val myUtilitySend = UtilitySend()
-                    myUtilitySend.execute(byteArray)
-
-                    val myUtilityReceive = UtilityReceive(progressBar)
-                    myUtilityReceive.execute(imageView2)
+        if(resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                IMAGE_CAPTURE_CODE -> {
+                        Log.i(
+                            "TRACING_CODE",
+                            "in IMAGE_CAPTURE_CODE"
+                        )
+                        imageView2.setImageURI(imageUri)
+                        finishProcess()
+                }
+                IMAGE_GALLERY_CODE -> {
+                        Log.i(
+                            "TRACING_CODE",
+                            "in IMAGE_GALLERY_CODE"
+                        )
+                        imageView2.setImageURI(data?.data)
+                        finishProcess()
+                    }
+                else -> {
+                    Toast.makeText(this, "DisplayImage: Request not recognized", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
-            IMAGE_GALLERY_CODE -> {
-                if (resultCode == Activity.RESULT_OK){
-                    Log.i(
-                        "TRACING_CODE",
-                        "in IMAGE_GALLERY_CODE"
-                    )
-                    imageView2.setImageURI(data?.data)
-
-                    var bitmap = (imageView2.drawable as BitmapDrawable).bitmap
-
-                    val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
-
-                    var byteArray = stream.toByteArray()
-
-                    val myUtilitySend = UtilitySend()
-                    myUtilitySend.execute(byteArray)
-
-                    val myUtilityReceive = UtilityReceive(progressBar)
-                    myUtilityReceive.execute(imageView2)
-                }
-            }
-            else -> {
-                Toast.makeText(this, "DisplayImage: Request not recognized", Toast.LENGTH_SHORT).show()
-            }
+        } else {
+            finish()
         }
+    }
+
+    private fun finishProcess(){
+        val bitmap = (imageView2.drawable as BitmapDrawable).bitmap
+
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream)
+
+        val byteArray = stream.toByteArray()
+
+        val myUtilitySend = UtilitySend()
+        myUtilitySend.execute(byteArray)
+
+        val myUtilityReceive = UtilityReceive(progressBar)
+        myUtilityReceive.execute(imageView2)
     }
 
     private fun startImageCapture(){

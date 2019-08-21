@@ -10,6 +10,7 @@ import android.widget.CalendarView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +34,22 @@ class MainActivity : AppCompatActivity() {
         //We are setting up the button
         //Need to check permissions
 
-        floatingActionButton.setOnClickListener {
+        cameraFab.setOnClickListener {
+            if(imageCaptureFab.isVisible){
+                imageCaptureFab.hide()
+                imageCaptureFab.isClickable = false
+                gallerySelectFab.hide()
+                gallerySelectFab.isClickable = false
+            }
+            else{
+                imageCaptureFab.show()
+                gallerySelectFab.isClickable = true
+                gallerySelectFab.show()
+                imageCaptureFab.isClickable = true
+            }
+        }
+
+        imageCaptureFab.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_DENIED ||
@@ -57,10 +73,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        floatingActionButton2.setOnClickListener{
+        gallerySelectFab.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission( Manifest.permission.READ_EXTERNAL_STORAGE) ==
-                        PackageManager.PERMISSION_DENIED) {
+                    PackageManager.PERMISSION_DENIED) {
                     val permission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                     requestPermissions(permission, GALLERY_PERMISSION_CODE)
                 }
@@ -72,6 +88,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "System Version too old", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+
     }
 
     override fun onRequestPermissionsResult(
