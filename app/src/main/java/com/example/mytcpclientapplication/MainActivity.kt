@@ -35,18 +35,7 @@ class MainActivity : AppCompatActivity() {
         //Need to check permissions
 
         cameraFab.setOnClickListener {
-            if(imageCaptureFab.isVisible){
-                imageCaptureFab.hide()
-                imageCaptureFab.isClickable = false
-                gallerySelectFab.hide()
-                gallerySelectFab.isClickable = false
-            }
-            else{
-                imageCaptureFab.show()
-                gallerySelectFab.isClickable = true
-                gallerySelectFab.show()
-                imageCaptureFab.isClickable = true
-            }
+            toggleVisibility()
         }
 
         imageCaptureFab.setOnClickListener{
@@ -125,5 +114,18 @@ class MainActivity : AppCompatActivity() {
         val displayImageIntent = Intent(this, DisplayImage::class.java)
         displayImageIntent.putExtra("requestCode", requestCode)
         startActivity(displayImageIntent)
+    }
+    private fun toggleVisibility() {
+        if (imageCaptureFab.isVisible) {
+            imageCaptureFab.hide()
+            imageCaptureFab.isClickable = false
+            gallerySelectFab.hide()
+            gallerySelectFab.isClickable = false
+        } else {
+            imageCaptureFab.show()
+            gallerySelectFab.isClickable = true
+            gallerySelectFab.show()
+            imageCaptureFab.isClickable = true
+        }
     }
 }
