@@ -44,11 +44,14 @@ class DisplayImage : AppCompatActivity() {
 
         Log.i(
             "TRACING_CODE",
-            "in onActivityResult\nrequestCode: $requestCode"
+            "in onActivityResult\nrequestCode: $requestCode" +
+                    "\nShould match: $IMAGE_CAPTURE_CODE" +
+                    "\nData should be null: ${data==null}"
+
         )
         when (requestCode) {
             IMAGE_CAPTURE_CODE -> {
-                if (resultCode == Activity.RESULT_OK && data == null) {
+                if (resultCode == Activity.RESULT_OK) {
                     Log.i(
                         "TRACING_CODE",
                         "in IMAGE_CAPTURE_CODE"
@@ -77,6 +80,19 @@ class DisplayImage : AppCompatActivity() {
                         "in IMAGE_GALLERY_CODE"
                     )
                     imageView2.setImageURI(data?.data)
+
+                    var bitmap = (imageView2.drawable as BitmapDrawable).bitmap
+
+                    val stream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+
+                    var byteArray = stream.toByteArray()
+
+                    val myUtilitySend = UtilitySend()
+                    myUtilitySend.execute(byteArray)
+
+                    val myUtilityReceive = UtilityReceive(progressBar)
+                    myUtilityReceive.execute(imageView2)
                 }
             }
             else -> {
@@ -104,7 +120,7 @@ class DisplayImage : AppCompatActivity() {
     private fun startGallery(){
         val galleryIntent = Intent(Intent.ACTION_PICK)
         galleryIntent.type = "image/*"
-        startActivityForResult(galleryIntent, IMAGE_CAPTURE_CODE)
+        startActivityForResult(galleryIntent, IMAGE_GALLERY_CODE)
         Log.i(
             "TRACING_CODE",
             "in startGallery"

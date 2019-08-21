@@ -10,7 +10,7 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
     override fun doInBackground(vararg p0: ByteArray?): Void? {
 
         try {
-            val socket = Socket("10.255.208.30", 8000)
+            val socket = Socket("10.0.2.2", 8080)
             if (socket.isConnected) {
                 Log.i(
                     "TRACING_CODE",
