@@ -88,6 +88,12 @@ class DisplayImage : AppCompatActivity() {
     }
 
     private fun finishProcess(){
+
+        Log.i(
+            "TRACING_CODE",
+            "DisplayImage: finishProcess()"
+        )
+
         val bitmap = (imageView2.drawable as BitmapDrawable).bitmap
 
         val stream = ByteArrayOutputStream()
@@ -103,6 +109,12 @@ class DisplayImage : AppCompatActivity() {
     }
 
     private fun startImageCapture(){
+
+        Log.i(
+            "TRACING_CODE",
+            "DisplayImage: startImageCapture()"
+        )
+
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
@@ -119,6 +131,12 @@ class DisplayImage : AppCompatActivity() {
     }
 
     private fun startGallery(){
+
+        Log.i(
+            "TRACING_CODE",
+            "DisplayImage: startGallery()"
+        )
+
         val galleryIntent = Intent(Intent.ACTION_PICK)
         galleryIntent.type = "image/*"
         startActivityForResult(galleryIntent, IMAGE_GALLERY_CODE)

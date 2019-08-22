@@ -5,12 +5,18 @@ import android.util.Log
 import java.io.DataOutputStream
 import java.net.Socket
 
-class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
+class UtilitySend : AsyncTask<ByteArray, Void, Int>() {
 
-    override fun doInBackground(vararg p0: ByteArray?): Void? {
+    override fun doInBackground(vararg p0: ByteArray?): Int? {
+
+        Log.i(
+            "TRACING_CODE",
+            "UtilitySend: doInBackground(...)"
+        )
 
         try {
-            val socket = Socket("10.0.2.2", 8080)
+            val socket = Socket("63.145.119.11", 8080)
+
             if (socket.isConnected) {
                 Log.i(
                     "TRACING_CODE",
@@ -27,12 +33,13 @@ class UtilitySend : AsyncTask<ByteArray, Void, Void>() {
             dataOutputStream.flush()
             dataOutputStream.close()
             socket.close()
+            return 1
         } catch (e: Exception) {
             Log.i(
                 "TRACING_CODE",
                 "Everything has gone wrong! Here's the error: $e"
             )
         }
-        return null
+        return 0
     }
 }

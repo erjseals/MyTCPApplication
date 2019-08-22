@@ -17,6 +17,11 @@ class UtilityReceive(progressBar: ProgressBar) : AsyncTask<ImageView, Void, Bitm
 
     override fun doInBackground(vararg p0: ImageView?): Bitmap? {
 
+        Log.i(
+            "TRACING_CODE",
+            "UtilityReceive: doInBackground(...)"
+        )
+
         try {
             imageView = p0[0]
 
