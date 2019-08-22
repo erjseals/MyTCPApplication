@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         )
         val displayImageIntent = Intent(this, DisplayImage::class.java)
         displayImageIntent.putExtra("requestCode", requestCode)
+        toggleVisibility()
         startActivity(displayImageIntent)
     }
     private fun toggleVisibility() {

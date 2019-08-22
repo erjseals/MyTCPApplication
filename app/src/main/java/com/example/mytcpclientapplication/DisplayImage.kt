@@ -25,6 +25,11 @@ class DisplayImage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_image)
 
+        val actionbar = supportActionBar
+
+        actionbar!!.title = "Processed Image"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         val mIntentCode = intent.getIntExtra("requestCode", 0)
         Log.i(
             "TRACING_CODE",
@@ -37,6 +42,12 @@ class DisplayImage : AppCompatActivity() {
             else -> {Toast.makeText(this, "error code", Toast.LENGTH_SHORT).show()}
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
