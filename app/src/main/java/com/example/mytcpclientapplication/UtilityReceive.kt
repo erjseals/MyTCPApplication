@@ -20,7 +20,7 @@ class UtilityReceive(progressBar: ProgressBar) : AsyncTask<ImageView, Void, Bitm
         try {
             imageView = p0[0]
 
-            val server = ServerSocket(8000)
+            val server = ServerSocket(8080)
             Log.i("TRACING_CODE", "Server Started")
             Log.i("TRACING_CODE", "Waiting for a client ...")
 
