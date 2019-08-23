@@ -15,7 +15,7 @@ class UtilitySend : AsyncTask<ByteArray, Void, Int>() {
         )
 
         try {
-            val socket = Socket("63.145.119.11", 8080)
+            val socket = Socket("10.1.10.181", 8080)
 
             if (socket.isConnected) {
                 Log.i(
