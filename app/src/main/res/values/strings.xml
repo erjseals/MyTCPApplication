@@ -8,4 +8,5 @@
     <string name="capture_image">CAPTURE</string>
     <string name="gallery">GALLERY</string>
     <string name="title_activity_template">ActivityTemplate</string>
+    <string name="capture_an_image">Capture an Image?</string>
 </resources>
