@@ -58,16 +58,20 @@
         android:layout_width="110dp"
         android:layout_height="101dp"
         android:layout_marginTop="296dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_photo_camera" />
+        app:srcCompat="@drawable/ic_photo_camera" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="260dp"
         android:text="@string/capture_an_image"
         app:layout_constraintBottom_toBottomOf="parent"
