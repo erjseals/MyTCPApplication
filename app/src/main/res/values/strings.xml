@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ej\'s Kickin-Smart-Camera</string>
+    <string name="app_name">Kickin-Smart-Camera</string>
     <string name="test_connection">Test Connection</string>
     <string name="enter_message">Enter message</string>
     <string name="server_s_reply">Server\'s reply</string>
