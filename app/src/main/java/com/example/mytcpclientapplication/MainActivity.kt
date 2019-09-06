@@ -43,6 +43,12 @@ class MainActivity : AppCompatActivity() {
             toggleVisibility()
         }
 
+
+        //
+        //The button to select for capturing a new image
+        //Check the necessary permissions and Android system
+        //Attempts to acquire permissions from user if not set
+        //
         imageCaptureFab.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -67,6 +73,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //
+        //Button to select from the users gallery
+        //Checks permissions and, if not set, attempts to acquire them.
+        //
         gallerySelectFab.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission( Manifest.permission.READ_EXTERNAL_STORAGE) ==
@@ -87,6 +97,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    //
+    //Called on the return from the permissions request
+    //
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -111,6 +125,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //
+    //Create the intent to leave this activity
+    //
     private fun goToANewActivity(requestCode: Int) {
         Log.i(
             "TRACING_CODE",
@@ -121,6 +138,10 @@ class MainActivity : AppCompatActivity() {
         toggleVisibility()
         startActivity(displayImageIntent)
     }
+
+    //
+    //Code for the Floating Action Button
+    //
     private fun toggleVisibility() {
         if (imageCaptureFab.isVisible) {
             imageCaptureFab.hide()

@@ -1,7 +1,7 @@
 /*
 *   AUTHOR: Eric Seals
 *   DATE:   2019 09 06
-*   FILE:   MainActivity.kt
+*   FILE:   DisplayImage.kt
 */
 
 package com.example.mytcpclientapplication
@@ -51,12 +51,17 @@ class DisplayImage : AppCompatActivity() {
         }
     }
 
+    //
+    //If back button pressed
+    //
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
 
-
+    //
+    //
+    //
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -95,6 +100,9 @@ class DisplayImage : AppCompatActivity() {
         }
     }
 
+    //
+    //
+    //
     private fun finishProcess(){
 
         Log.i(
@@ -116,11 +124,17 @@ class DisplayImage : AppCompatActivity() {
         myUtilityReceive.execute(imageView2)
     }
 
+    //
+    //
+    //
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) hideSystemUI()
     }
 
+    //
+    //
+    //
     private fun hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
@@ -138,14 +152,16 @@ class DisplayImage : AppCompatActivity() {
     }
 
     // Shows the system bars by removing all the flags
-// except for the ones that make the content appear under the system bars.
+    // except for the ones that make the content appear under the system bars.
     private fun showSystemUI() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
-
+    //
+    //
+    //
     private fun startImageCapture(){
 
         Log.i(
@@ -168,6 +184,9 @@ class DisplayImage : AppCompatActivity() {
         )
     }
 
+    //
+    //
+    //
     private fun startGallery(){
 
         Log.i(

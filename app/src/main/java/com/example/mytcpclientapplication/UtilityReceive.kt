@@ -1,7 +1,7 @@
 /*
 *   AUTHOR: Eric Seals
 *   DATE:   2019 09 06
-*   FILE:   MainActivity.kt
+*   FILE:   UtilityReceive.kt
 */
 
 package com.example.mytcpclientapplication
@@ -21,6 +21,9 @@ class UtilityReceive(progressBar: ProgressBar) : AsyncTask<ImageView, Void, Bitm
     var imageView: ImageView? = null
     var mProgressBar = progressBar
 
+    //
+    //
+    //
     override fun doInBackground(vararg p0: ImageView?): Bitmap? {
 
         Log.i(
@@ -66,11 +69,17 @@ class UtilityReceive(progressBar: ProgressBar) : AsyncTask<ImageView, Void, Bitm
         return null
     }
 
+    //
+    //
+    //
     override fun onPreExecute() {
         super.onPreExecute()
         mProgressBar.visibility = View.VISIBLE
     }
 
+    //
+    //
+    //
     override fun onPostExecute(result: Bitmap?) {
         super.onPostExecute(result)
         imageView?.setImageBitmap(result)

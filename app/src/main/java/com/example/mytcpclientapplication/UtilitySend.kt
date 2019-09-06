@@ -1,7 +1,7 @@
 /*
 *   AUTHOR: Eric Seals
 *   DATE:   2019 09 06
-*   FILE:   MainActivity.kt
+*   FILE:   UtilitySend.kt
 */
 
 package com.example.mytcpclientapplication
@@ -13,6 +13,9 @@ import java.net.Socket
 
 class UtilitySend : AsyncTask<ByteArray, Void, Int>() {
 
+    //
+    //
+    //
     override fun doInBackground(vararg p0: ByteArray?): Int? {
 
         Log.i(
