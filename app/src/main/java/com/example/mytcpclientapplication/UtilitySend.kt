@@ -1,3 +1,9 @@
+/*
+*   AUTHOR: Eric Seals
+*   DATE:   2019 09 06
+*   FILE:   MainActivity.kt
+*/
+
 package com.example.mytcpclientapplication
 
 import android.os.AsyncTask
@@ -15,7 +21,7 @@ class UtilitySend : AsyncTask<ByteArray, Void, Int>() {
         )
 
         try {
-            val socket = Socket("192.168.43.89", 8080)
+            val socket = Socket("10.104.107.217", 8080)
 
             if (socket.isConnected) {
                 Log.i(

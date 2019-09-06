@@ -1,3 +1,9 @@
+/*
+*   AUTHOR: Eric Seals
+*   DATE:   2019 09 06
+*   FILE:   MainActivity.kt
+*/
+
 package com.example.mytcpclientapplication
 
 import android.graphics.Bitmap
