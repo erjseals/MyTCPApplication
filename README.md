@@ -1,4 +1,4 @@
-# Sharp Edges - Android Repository
+# Sharp Edges - Android 
 
 Demonstrates in real time the substantial performance increase that dedicated servers on the edge offer over on-device
 computation by building a Client/Server.
